@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cn-trabalho1-backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cn-trabalho1-backend
+  template:
+    metadata:
+      labels:
+        app: cn-trabalho1-backend
+    spec:
+      containers:
+        - name: cn-trabalho1-backend
+          image: registryceub999.azurecr.io/cn-trabalho1-backend:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres-service:5432/postgres
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: postgres-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cn-trabalho1-backend-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: cn-trabalho1-backend
+  ports:
+    - port: 80
+      targetPort: 8080

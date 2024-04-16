@@ -1,0 +1,13 @@
+package com.cn.cntrabalho1;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class CnTrabalho1ApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
