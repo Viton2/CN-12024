@@ -1,41 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cn-trabalho1-backend-deployment
+  name: cn-trabalho1-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cn-trabalho1-backend
+      app: cn-trabalho1  # Este label precisa corresponder exatamente entre Deployment e Service
   template:
     metadata:
       labels:
-        app: cn-trabalho1-backend
+        app: cn-trabalho1  # Este label precisa corresponder ao selector do Service
     spec:
       containers:
-        - name: cn-trabalho1-backend
-          image: registryceub999.azurecr.io/cn-trabalho1-backend:latest
+        - name: cn-trabalho1
+          image: registryceub999.azurecr.io/cn-12024:latest  # Certifique-se de que esta imagem está acessível pelo seu cluster
           ports:
-            - containerPort: 8080
-          env:
-            - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres-service:5432/postgres
-            - name: SPRING_DATASOURCE_USERNAME
-              value: postgres
-            - name: SPRING_DATASOURCE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: postgres-password
+            - containerPort: 8080  # O container está expondo a porta 8080
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: cn-trabalho1-backend-service
+  name: cn-trabalho1-service
 spec:
-  type: LoadBalancer
+  type: LoadBalancer  # Este tipo de serviço provê um IP externo
   selector:
-    app: cn-trabalho1-backend
+    app: cn-trabalho1  # O selector aqui estava incorreto no seu YAML original, deve corresponder ao label do Deployment
   ports:
-    - port: 80
-      targetPort: 8080
+    - port: 80  # A porta na qual o serviço será acessível externamente
+      targetPort: 8080  # A porta do container que este serviço irá direcionar
