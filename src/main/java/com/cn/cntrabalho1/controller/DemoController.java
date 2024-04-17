@@ -17,14 +17,9 @@ public class DemoController {
         this.demoService = demoService;
     }
 
-    @GetMapping
-    public String demo(){
-        return demoService.helloWorld();
-    }
 
-    @GetMapping("/home")
+    @GetMapping
     public String homePage(Model model){
-        model.addAttribute("message", "Hello Thymeleaf!");
         return "index";
     }
 }

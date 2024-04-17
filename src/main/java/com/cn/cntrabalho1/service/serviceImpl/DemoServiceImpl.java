@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class DemoServiceImpl implements DemoService {
 
-    private final DemoRepository demoRepository;
+//    private final DemoRepository demoRepository;
 
-    public DemoServiceImpl(DemoRepository demoRepository) {
-        this.demoRepository = demoRepository;
-    }
+//    public DemoServiceImpl(DemoRepository demoRepository) {
+//        this.demoRepository = demoRepository;
+//    }
 
     @Override
     public String helloWorld() {
