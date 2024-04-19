@@ -11,12 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class DemoController {
 
-    private final DemoService demoService;
-
-    public DemoController(DemoService demoService) {
-        this.demoService = demoService;
-    }
-
 
     @GetMapping
     public String homePage(Model model){
