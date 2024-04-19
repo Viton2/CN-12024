@@ -26,7 +26,7 @@ metadata:
 spec:
   type: LoadBalancer  # Este tipo de serviço provê um IP externo
   selector:
-    app: cn-trabalho1  # O selector aqui estava incorreto no seu YAML original, deve corresponder ao label do Deployment
+    app: cn-trabalho1  # Deve corresponder ao label do Deployment
   ports:
     - port: 80  # A porta na qual o serviço será acessível externamente
       targetPort: 8080  # A porta do container que este serviço irá direcionar
