@@ -11,7 +11,7 @@ public class PageController {
 
 
     @GetMapping
-    public String homePage(Model model){
-        return "index";
+    public String homePage(){
+        return "jogo_da_velha";
     }
 }
